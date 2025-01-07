@@ -4,6 +4,6 @@ import { MainscreenComponent } from './features/mainscreen/mainscreen.component'
 export const routes: Routes = [
     {
         path: 'mainscreen',
-        component: Mainscreen
+        component: MainscreenComponent
     }
 ];
