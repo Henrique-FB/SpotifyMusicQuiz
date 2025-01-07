@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'Mainscreen',
   standalone: true,
   imports: [],
-  templateUrl: './features/mainscreen.component.html',
-  styleUrl: './features/mainscreen.component.css'
+  templateUrl: './mainscreen.component.html',
+  styleUrl: './mainscreen.component.css'
 })
 export class MainscreenComponent {
 
