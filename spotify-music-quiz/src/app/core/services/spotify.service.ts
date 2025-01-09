@@ -9,8 +9,8 @@ import { environment } from '../../../environments/environment';
 export class SpotifyService {
 
     scopes: string[] =  ["user-read-private"]
-    sdk: SpotifyApi = SpotifyApi.withClientCredentials(environment.spotifyClient, environment.spotifySecret, this.scopes);
-    
+    //sdk: SpotifyApi = SpotifyApi.withClientCredentials(environment.spotifyClient, environment.spotifySecret, this.scopes);
+    sdk: SpotifyApi = SpotifyApi.withUserAuthorization(environment.spotifyClient, "http://localhost:4200")
     constructor() {}
 }
 
