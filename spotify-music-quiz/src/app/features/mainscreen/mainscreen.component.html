@@ -1,3 +1,19 @@
-<div id="artist-name"><b>Artist Name</b></div>
-<div id="artist-pic"></div>
-<input type="text" id="answer" placeholder="Type your answer here">
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="artist-pic">
+        <img src="{{songPicture}}" alt="Song related picture">
+      </div>
+  
+      <input type="text" placeholder="Type your answer here" class="form-control" [(ngModel])="answer">
+      <button type="button" class="btn btn-dark">Check</button>
+
+      {{answer}}
+    </div>
+  </body>
+</html>

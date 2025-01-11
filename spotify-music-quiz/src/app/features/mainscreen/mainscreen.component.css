@@ -1,17 +1,57 @@
 #artist-pic{
     width: 440pt;
     min-height: 240pt;
-    background-color: rgb(33, 209, 159);
+    background-color: #c4c5d6;
     margin: 0 auto;
+    border-radius: 4px;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20pt;
 }
 
 #answer{
     text-align: center;
     width: 440pt;
-    height: 24pt;
+    height: 32pt;
     margin-top: 20pt;
+    color: #070707;
+    background-color: #c4c5d6;
+    font-family: 'Josefin Sans', sans-serif;
+    border-radius: 4px;
 }
 
-#artist-name{
+#answer:focus{
+    box-shadow: #070707;
+    border: #070707;
+    border-radius: 4px;
+}
+
+#answer:focus::placeholder{
+    opacity: 0;
+}
+
+/* #artist-name{
     text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    margin-top: -20px;
+} */
+
+body{
+    background-color: #1B1F3B;
+    color: #c4c5d6;
+}
+
+button{
+    padding: 8pt 24pt;
+    background-color: #454ADE;
+    color: #c4c5d6;
+    font-weight: 700;
+    margin-top: 10pt;
+    font-size: 12pt;
 }
