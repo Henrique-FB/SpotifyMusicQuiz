@@ -1,0 +1,98 @@
+#artist-pic{
+    width: 440pt;
+    min-height: 240pt;
+    background-color: #c4c5d6;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+#fakeBody{
+    background-color: #1B1F3B;
+    height: 100vh;
+}
+
+h2{
+    color: #c4c5d6;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#guessUser{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20pt;
+}
+
+input{
+    text-align: center;
+    width: 440pt;
+    height: 32pt;
+    color: #070707;
+    background-color: #c4c5d6;
+    font-family: 'Josefin Sans', sans-serif;
+    border-radius: 4px;
+    border: none;
+}
+
+input::placeholder{
+    font-family: 'Josefin Sans', sans-serif;
+    color: #424242;
+    font-style: italic;
+}
+
+img{
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #424242;
+    font-style: italic;
+    font-size: 10pt;
+    padding: 10pt;
+}
+
+input:focus{
+    box-shadow: 0 2px #070707;
+    border: #070707;
+    border-radius: 4px;
+}
+
+input:focus::placeholder{
+    box-shadow: 0 2px #070707;
+    opacity: 0;
+}
+
+/* #artist-name{
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    margin-top: -20px;
+} */
+
+button{
+    padding: 8pt 24pt;
+    background-color: #454ADE;
+    color: #c4c5d6;
+    font-weight: 700;
+    margin-top: 10pt;
+    font-size: 12pt;
+    width: 120pt;
+    height: 34pt;
+    margin: 10pt auto 0;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px #070707;
+}
+
+button:hover{
+    cursor: pointer;
+    box-shadow: 1px 1px 10px 1px rgb(196, 197, 214, 0.2);
+}
+
+button:active{
+    transform: translateY(2px);
+}
