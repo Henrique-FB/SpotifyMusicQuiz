@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'
-
+import { FormsModule } from '@angular/forms';
+import { GameRoomService } from '../../core/services/gameRoom.service';
 
 @Component({
   standalone:true,
@@ -14,5 +14,11 @@ export class MainscreenComponent {
   songPicture : string = '';
   answer : string = '';
 
-  constructor() {}
+  constructor(private gameRoom:GameRoomService) {}
+
+//  testFunc(){
+//    this.gameRoom.joinRoom()
+//  }
+
+
 }
