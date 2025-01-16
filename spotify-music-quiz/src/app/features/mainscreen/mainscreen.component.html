@@ -1,15 +1,20 @@
 <div id="fakeBody">
     <div id="container">
 
+
+      <input name="user" type="text" placeholder="type your name here" class="form-control" [(ngModel)]="username">
+
       <h2>Spotify Music Quiz ✰</h2>
       <div id="artist-pic">
         <img src="{{songPicture}}" alt="Song related picture">
       </div>
       
       <form id="guessUser" name="guessUser" type="submit">
-        <input name="guess" type="text" placeholder="Type your answer here" class="form-control" [(ngModel)]="answer">
-        
+        <input name="guess" type="text" placeholder="Type your answer here" class="form-control" [(ngModel)]="guess">
+        <button type="button" class="btn btn-dark" (click)="sendGuess()">Check</button>
       </form>
+
+      {{ testComms }}
 
     </div>
 </div>
