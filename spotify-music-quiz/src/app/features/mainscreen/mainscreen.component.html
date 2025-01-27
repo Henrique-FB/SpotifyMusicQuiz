@@ -1,12 +1,17 @@
 <div id="fakeBody">
     <div id="container">
 
-
       <input name="user" type="text" placeholder="type your name here" class="form-control" [(ngModel)]="username">
 
       <h2>Spotify Music Quiz ✰</h2>
-      <div id="artist-pic">
-        <img src="{{songPicture}}" alt="Song related picture">
+      <div id="songFrame">
+        <img id="artistPic" src="https://inmagazine.ig.com.br/wp-content/uploads/2023/11/post_14734.jpg" alt="Song related picture">
+        <div id="songInfo">
+          <p id="songTitle">Song Title</p>
+          <p id="artistName">Artist Name</p>
+          <p id="albumTitle">Album Title</p>
+          <p id="releaseDate">Release Date</p>
+        </div>
       </div>
       
       <form id="guessUser" name="guessUser" type="submit">
@@ -14,6 +19,7 @@
         <button type="button" class="btn btn-dark" (click)="sendGuess()">Check</button>
       </form>
 
+      
       {{ testComms }}
 
     </div>

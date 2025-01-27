@@ -1,9 +1,30 @@
-#artist-pic{
+#songFrame{
     width: 440pt;
     min-height: 240pt;
     background-color: #c4c5d6;
     margin: 0 auto;
     border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+#artistPic{
+    position: absolute;
+    object-fit: contain;
+    width: 100%;
+    padding: 0pt;
+}
+
+#songInfo{
+    position: absolute;
+    text-align: center;
+    right: 0;
+    bottom: 0;
+    background-color: #c4c5d6;
+    border-radius: 4px;
+    color: #070707;
+    min-width: 120pt;
+    min-height: 100pt;
 }
 
 #fakeBody{
@@ -65,13 +86,6 @@ input:focus::placeholder{
     box-shadow: 0 2px #070707;
     opacity: 0;
 }
-
-/* #artist-name{
-    text-align: center;
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 300;
-    margin-top: -20px;
-} */
 
 button{
     padding: 8pt 24pt;
