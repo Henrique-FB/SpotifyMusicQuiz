@@ -3,32 +3,36 @@ from spotipy.oauth2 import SpotifyOAuth
 from spotipy.oauth2 import SpotifyClientCredentials
 from secret import CLIENT_ID, CLIENT_SECRET
 import re
+import webbrowser
 
 
-scope = "playlist-read-private user-read-playback-state user-read-private  user-modify-playback-state"
+
+
+scope = "playlist-read-private user-read-playback-state user-read-private user-modify-playback-state"
 sp_oauth = SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri="http://localhost:9000", scope=scope)
-sp = spotipy.Spotify(auth_manager=sp_oauth)
-sp.current_playback()
-print("APIManager initialized")
 
-def get_playlist(playlist_id : str, fields : str | None = "id, images, name, tracks(next, items(track(name, id, artists(name, id))))"):
-    sub_fields = re.search(r'.*tracks\((.*)\)', fields).group(1)
-    playlist = sp.playlist(playlist_id, fields=fields)
-    playlist_info = {}
-    playlist_info['id'] = playlist['id']
-    playlist_info['name'] = playlist['name']
-    playlist_info['images'] = playlist['images']
-    playlist_info['tracks'] = []
 
-    while(playlist['tracks']):
-        print(len(playlist['tracks']['items']))
-        print(playlist['tracks']['next'])
-        for track in playlist['tracks']['items']:
-            playlist_info['tracks'].append(track)
-        if playlist['tracks']['next']:
-            playlist['tracks'] = sp.playlist_items(playlist['id'], offset=len(playlist_info['tracks']), fields=sub_fields) 
-        else:
-            break
-    return playlist_info
+auth_url = sp_oauth.get_authorize_url()
+print(f'Please navigate here: {auth_url}')
 
-print(get_playlist('0VK3VVnXLlDV2WOougo0sx'))
+# After the user authorizes, they will be redirected to the redirect URI.
+# Extract the code from the URL and use it to get the access token.
+response = input('Enter the URL you were redirected to: ')
+code = sp_oauth.parse_response_code(response)
+token_info = sp_oauth.get_access_token(code)
+#sp_oauth.revoke_token(token_info['access_token'])
+
+
+# Create a Spotipy instance with the access token
+sp = spotipy.Spotify(auth=token_info['access_token'])
+
+# Get the current playback information
+playback = sp.current_playback()
+
+if playback is not None:
+    print("Currently playing:", playback['item']['name'])
+    print("Artist:", playback['item']['artists'][0]['name'])
+    print("Album:", playback['item']['album']['name'])
+    print("Progress:", playback['progress_ms'], "ms")
+else:
+    print("No playback detected.")

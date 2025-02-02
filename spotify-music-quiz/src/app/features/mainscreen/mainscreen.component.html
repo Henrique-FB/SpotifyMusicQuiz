@@ -12,6 +12,7 @@
       <form id="guessUser" name="guessUser" type="submit">
         <input name="guess" type="text" placeholder="Type your answer here" class="form-control" [(ngModel)]="guess">
         <button type="button" class="btn btn-dark" (click)="sendGuess()">Check</button>
+        <button type="button" class="btn btn-dark" (click)="sendGuess2()">Search</button>
       </form>
 
       {{ testComms }}

@@ -37,5 +37,9 @@ export class MainscreenComponent {
       this.gameRoom.sendGuess(this.guess);
       console.log("sent")
   }
-
+  
+  sendGuess2(){
+    this.gameRoom.sendGuess2(this.guess);
+    console.log("sent")
+  }
 }

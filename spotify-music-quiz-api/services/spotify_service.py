@@ -6,12 +6,9 @@ import re
 
 
 class SpotipyManager:
-    def __init__(self):
+    def __init__(self, username = "test"):
         self.scope = "playlist-read-private user-read-playback-state user-read-private user-modify-playback-state"
-        self.sp_oauth = SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri="http://localhost:9000", scope=self.scope)
-        self.sp = spotipy.Spotify(auth_manager=self.sp_oauth)
-        self.sp.current_playback()
-        print("APIManager initialized")
+        self.sp_oauth = SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri="http://localhost:9000", scope=self.scope, username=username)
 
     def get_playlist(self, playlist_id, fields : str | None = "id, images, name, tracks(next, items(track(name, id, artists(name, id))))"):
         sub_fields = re.search(r'.*tracks\((.*)\)', fields).group(1)
@@ -32,3 +29,15 @@ class SpotipyManager:
             else:
                 break
         return playlist_info
+
+    def get_auth_url(self):
+        return self.sp_oauth.get_authorize_url()
+    
+    def get_access_token(self, code):
+        return self.sp_oauth.get_access_token(code)
+    
+    def parse_response_code(self, redirect_response):
+        return self.sp_oauth.parse_response_code(redirect_response)
+
+    def set_sp(self, access_token):
+        self.sp = spotipy.Spotify(auth=access_token)
