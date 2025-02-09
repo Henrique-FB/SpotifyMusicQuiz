@@ -10,15 +10,17 @@ export class GameRoomService {
 
     userdata = {
         username: "randomUser",
-        room: "chatroom1"
+        room: "chatroom1",
+        authCode: "",
     }
 
     constructor(
         private socket: Socket, 
     ){}
     
-    setUserDetails(username:string, room:string){
+    setUserDetails(username:string, room:string, authCode:string){
         this.userdata.username = username
+        this.userdata.authCode = authCode
     }
 
     async joinRoom(){
@@ -30,16 +32,6 @@ export class GameRoomService {
     }
 
     async sendGuess(guess:string){
-        let attrs = {
-            "username": this.userdata.username,
-            "room": this.userdata.room,
-            "redirect_response": guess
-        }
-        this.socket.emit('auth_code',attrs)
-        console.log("sent")
-    }
-
-    async sendGuess2(guess:string){
         let attrs = {
             "username": this.userdata.username,
             "room": this.userdata.room,
@@ -56,7 +48,7 @@ export class GameRoomService {
             });
 
             this.socket.on('auth_url', (data: any) => {
-                window.open(data, '_blank');
+                window.location.href = data;
             });
         });
     }

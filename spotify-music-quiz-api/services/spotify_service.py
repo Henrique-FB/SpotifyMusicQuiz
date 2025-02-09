@@ -4,11 +4,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from ..secret import CLIENT_ID, CLIENT_SECRET
 import re
 
-
 class SpotipyManager:
     def __init__(self, username = "test"):
         self.scope = "playlist-read-private user-read-playback-state user-read-private user-modify-playback-state"
-        self.sp_oauth = SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri="http://localhost:9000", scope=self.scope, username=username)
+        self.sp_oauth = SpotifyOAuth(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, redirect_uri="http://localhost:4200", scope=self.scope, username=username)
 
     def get_playlist(self, playlist_id, fields : str | None = "id, images, name, tracks(next, items(track(name, id, artists(name, id))))"):
         sub_fields = re.search(r'.*tracks\((.*)\)', fields).group(1)

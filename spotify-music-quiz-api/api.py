@@ -19,46 +19,46 @@ def on_join(data):
     sid = request.sid
     username= data['username']
 
-    user_dict = {}
-    user_dict['username'] = username
-    player_number = len(room_info['users'].keys())
-    user_dict['sp_manager'] = SpotipyManager(sid)
-    user_dict['player_number'] = player_number
-    user_dict['playlists'] = []
-    user_dict['artists'] = []
-    user_dict['score'] = 0
+    print(data['username'])
+    print(data['authCode'])
 
-    room_info['users'][sid] = user_dict
-
-    # ask user for spotify authentication
-    emit('message', 'Welcome to the room ' + username, to=sid)
-    auth_url = room_info['users'][sid]['sp_manager'].get_auth_url()    
-    emit('auth_url', auth_url, to=sid)
-
-    join_room(room)
-    print("User joined: " + username)
-    emit('message', username + ' has entered the room.', to=room, skip_sid=sid)
-
-@socketio.on('auth_code')
-def on_auth_code(data):
-    sid = request.sid
-    spManager = room_info['users'][sid]['sp_manager']
-    code = spManager.parse_response_code(data['redirect_response'])
-    token_info = spManager.get_access_token(code)
-    access_token = token_info["access_token"]
-    spManager.set_sp(access_token)
-    spManager.sp.current_playback()
-    emit('message', 'Currently listening to:' + spManager.sp.current_playback()['item']['name'], to=room)
+    if(data['authCode'] == ''):       
+        emit('message', 'Please authenticate with Spotify before joining the room.', to=request.sid)
+        temp_spotipy_manager = SpotipyManager(sid)
+        auth_url = temp_spotipy_manager.get_auth_url()
+        emit('auth_url', auth_url, to=sid)
+        return
+    
+    else:
+        print(data['authCode'])
+        user_dict = {}
+        user_dict['username'] = username
+        player_number = len(room_info['users'].keys())
+        user_dict['sp_manager'] = SpotipyManager(sid)
+        code = user_dict['sp_manager'].parse_response_code(data['authCode'])
+        token_info = user_dict['sp_manager'].get_access_token(code)
+        access_token = token_info["access_token"]
+        user_dict['sp_manager'].set_sp(access_token)
+        user_dict['sp_manager'].sp.current_playback()
+        user_dict['player_number'] = player_number
+        user_dict['playlists'] = []
+        user_dict['artists'] = []
+        user_dict['score'] = 0
+        room_info['users'][sid] = user_dict
+        emit('message', 'Welcome to the room ' + username, to=sid)
+        join_room(room)
+        print("User joined: " + username)
+        emit('message', username + ' has entered the room.', to=room, skip_sid=sid)
 
 @socketio.on('disconnect')
 def on_disconnect():
     leave_room(room)
     sid = request.sid
-    username = room_info['users'][sid]['username']
-    del room_info['users'][sid]
-    print("User left: " + username)
-    emit('message', username + ' has left the room.', to=room, skip_sid=sid)
-
+    if(room_info['users'][sid]):
+        username = room_info['users'][sid]['username']
+        del room_info['users'][sid]
+        print("User left: " + username)
+        emit('message', username + ' has left the room.', to=room, skip_sid=sid)
 
 @socketio.on('guess')
 def on_guess(data):
