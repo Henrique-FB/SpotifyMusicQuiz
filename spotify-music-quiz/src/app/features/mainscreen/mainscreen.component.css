@@ -19,13 +19,15 @@
     position: absolute;
     right: 0;
     bottom: 0;
-    background-color: #c4c5d6;
+    background-image: radial-gradient(circle, white, #c4c5d6) ;
     border-radius: 4px;
     min-width: 130pt;
     min-height: 100pt;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    opacity: 0.8;
+    animation: fadeIn 1s;
 }
 
 #songInfo p{
@@ -36,6 +38,7 @@
     line-height: 12pt;
     margin-left: 10pt;
     margin-right: 10pt;
+    
 }
 
 #songTitle{
@@ -135,4 +138,17 @@ button:hover{
 
 button:active{
     transform: translateY(2px);
+}
+
+@keyframes fadeIn{
+    from{
+        right: -130pt;
+        bottom: -100pt;
+        opacity: 0;
+        }
+    to{
+        right: 0pt;
+        bottom: 0pt;
+        
+    }
 }
