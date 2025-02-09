@@ -17,14 +17,40 @@
 
 #songInfo{
     position: absolute;
-    text-align: center;
     right: 0;
     bottom: 0;
     background-color: #c4c5d6;
     border-radius: 4px;
-    color: #070707;
-    min-width: 120pt;
+    min-width: 130pt;
     min-height: 100pt;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#songInfo p{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 10pt;
+    color: #070707;
+    text-align: center;
+    line-height: 12pt;
+    margin-left: 10pt;
+    margin-right: 10pt;
+}
+
+#songTitle{
+    margin-bottom: -4pt;
+}
+
+#artistName{
+    margin-bottom: -4pt;
+}
+
+#albumTitle{
+    margin-bottom: -4pt;
+}
+
+#releaseDate{
 }
 
 #fakeBody{
