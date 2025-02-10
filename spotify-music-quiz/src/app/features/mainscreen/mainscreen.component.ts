@@ -23,19 +23,29 @@ export class MainscreenComponent {
   constructor(private gameRoom:GameRoomService) {}
 
   ngOnInit() {
-    this.gameRoom.setUserDetails(this.username,'chatroom1');
-    this.gameRoom.joinRoom();
+    const params = new URLSearchParams(window.location.search);
+    const authCode = params.get('code');
+    console.log(authCode)
+    if(authCode){
+    this.gameRoom.setUserDetails(this.username,'chatroom1',authCode);
+    this.gameRoom.joinRoom()
+    }
     
+    if(!authCode){
+      this.gameRoom.setUserDetails(this.username,'chatroom1','');
+      this.gameRoom.joinRoom();
+    }
+
+
     this.gameRoom.listenForGuesses().subscribe((data)=>{
       this.testComms = data
       console.log(data)
     });
 
   }
-
+  
   sendGuess(){
-      this.gameRoom.sendGuess(this.guess);
-      console.log("sent")
+    this.gameRoom.sendGuess(this.guess);
+    console.log("sent")
   }
-
 }

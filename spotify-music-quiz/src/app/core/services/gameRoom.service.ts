@@ -10,16 +10,17 @@ export class GameRoomService {
 
     userdata = {
         username: "randomUser",
-        room: "chatroom1"
+        room: "chatroom1",
+        authCode: "",
     }
 
     constructor(
         private socket: Socket, 
     ){}
     
-    setUserDetails(username:string, room:string){
+    setUserDetails(username:string, room:string, authCode:string){
         this.userdata.username = username
-        this.userdata.room = room
+        this.userdata.authCode = authCode
     }
 
     async joinRoom(){
@@ -44,6 +45,10 @@ export class GameRoomService {
         return new Observable((observer) => {
             this.socket.on('message', (data: any) => {
                 observer.next(data);
+            });
+
+            this.socket.on('auth_url', (data: any) => {
+                window.location.href = data;
             });
         });
     }
